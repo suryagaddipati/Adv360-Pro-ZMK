@@ -37,22 +37,22 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp EQUAL  &kp N1     &kp N2    &kp N3    &kp N4     &kp N5  &tog 1                                                    &mo 3          &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T   &none                                                     &none          &kp Y   &kp U   &kp I      &kp O     &kp P     &kp BSLH
-&kp ESC    &hm LGUI A  &hm LCTRL S  &hm LSHFT D  &sym 4 F    &kp G   &none      &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none          &kp H   &sym 4 J   &hm RSHFT K  &hm RCTRL L  &hm RGUI SEMI  &kp SQT
-&kp LSHFT  &kp Z      &kp X     &kp C     &kp V      &kp B                         &kp HOME      &kp PG_UP                            &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-&mo 2      &kp GRAVE  &kp CAPS  &kp LEFT  &kp RIGHT          &kp SPACE  &kp DEL    &kp END       &kp PG_DN  &kp ENTER  &kp BACKSPACE          &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &mo 2
+&kp EQUAL  &kp N1      &kp N2       &kp N3       &kp N4     &kp N5  &tog 1                                                    &mo 3          &kp N6  &kp N7    &kp N8       &kp N9       &kp N0         &kp MINUS
+&kp TAB    &kp Q       &kp W        &kp E        &kp R      &kp T   &none                                                     &none          &kp Y   &kp U     &kp I        &kp O        &kp P          &kp BSLH
+&kp ESC    &hm LGUI A  &hm LCTRL S  &hm LSHFT D  &sym 4 F   &kp G   &none      &kp LCTRL  &kp DEL       &kp LGUI   &kp RCTRL  &none          &kp H   &sym 4 J  &hm RSHFT K  &hm RCTRL L  &hm RGUI SEMI  &kp SQT
+&kp LSHFT  &kp Z       &kp X        &kp C        &kp V      &kp B                         &kp HOME      &kp PG_UP                            &kp N   &kp M     &kp COMMA    &kp DOT      &kp FSLH       &kp RSHFT
+&mo 2      &kp GRAVE   &kp CAPS     &kp LEFT     &kp RIGHT          &kp SPACE  &kp ESC    &kp END       &kp PG_DN  &kp ENTER  &kp BACKSPACE          &kp UP    &kp DOWN     &kp LBKT     &kp RBKT       &mo 2
             >;
         };
 
         keypad {
             display-name = "Kp";
             bindings = <
-&kp EQUAL  &kp N1     &kp N2    &kp N3    &kp N4     &kp N5  &trans                                                   &mo 3      &kp N6  &kp KP_NUM  &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY  &kp MINUS
-&kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T   &none                                                    &none      &kp Y   &kp KP_N7   &kp KP_N8     &kp KP_N9      &kp KP_MINUS     &kp BSLH
-&kp ESC    &hm LGUI A  &hm LCTRL S  &hm LSHFT D  &sym 4 F    &kp G   &none     &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H   &sym 4 KP_N4   &hm RSHFT KP_N5  &hm RCTRL KP_N6      &hm RGUI KP_PLUS      &kp SQT
-&kp LSHFT  &kp Z      &kp X     &kp C     &kp V      &kp B                        &kp HOME      &kp PG_UP                        &kp N   &kp KP_N1   &kp KP_N2     &kp KP_N3      &kp KP_ENTER     &kp RSHFT
-&mo 2      &kp GRAVE  &kp CAPS  &kp LEFT  &kp RIGHT          &kp BSPC  &kp DEL    &kp END       &kp PG_DN  &kp ENTER  &kp KP_N0          &kp UP      &kp DOWN      &kp KP_DOT     &kp RBKT         &mo 2
+&kp EQUAL  &kp N1      &kp N2       &kp N3       &kp N4     &kp N5  &trans                                                   &mo 3      &kp N6  &kp KP_NUM    &kp KP_EQUAL     &kp KP_DIVIDE    &kp KP_MULTIPLY   &kp MINUS
+&kp TAB    &kp Q       &kp W        &kp E        &kp R      &kp T   &none                                                    &none      &kp Y   &kp KP_N7     &kp KP_N8        &kp KP_N9        &kp KP_MINUS      &kp BSLH
+&kp ESC    &hm LGUI A  &hm LCTRL S  &hm LSHFT D  &sym 4 F   &kp G   &none     &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H   &sym 4 KP_N4  &hm RSHFT KP_N5  &hm RCTRL KP_N6  &hm RGUI KP_PLUS  &kp SQT
+&kp LSHFT  &kp Z       &kp X        &kp C        &kp V      &kp B                        &kp HOME      &kp PG_UP                        &kp N   &kp KP_N1     &kp KP_N2        &kp KP_N3        &kp KP_ENTER      &kp RSHFT
+&mo 2      &kp GRAVE   &kp CAPS     &kp LEFT     &kp RIGHT          &kp BSPC  &kp DEL    &kp END       &kp PG_DN  &kp ENTER  &kp KP_N0          &kp UP        &kp DOWN         &kp KP_DOT       &kp RBKT          &mo 2
             >;
         };
 
@@ -81,11 +81,11 @@
         sym {
             display-name = "Sym";
             bindings = <
-&trans      &trans      &trans    &trans    &trans     &trans  &trans                                                   &trans          &trans  &trans  &trans     &trans    &trans    &trans
-&trans      &trans      &trans    &trans    &trans     &trans  &none                                                    &none          &trans  &trans  &trans     &trans    &trans    &trans
-&trans      &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)  &none      &trans      &trans      &trans      &trans      &none          &kp LS(N6)  &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp LS(N0)  &trans
-&trans      &trans      &trans    &trans    &trans     &trans                        &trans      &trans                            &trans  &trans  &trans  &trans   &trans   &trans
-&trans      &trans      &trans    &trans    &trans          &kp LS(EQUAL)  &trans  &trans       &trans  &kp EQUAL  &trans          &trans  &trans   &trans  &trans  &trans
+&trans  &trans      &trans      &trans      &trans      &trans      &trans                                                &trans  &trans      &trans      &trans      &trans      &trans      &trans
+&trans  &trans      &trans      &trans      &trans      &trans      &none                                                 &none   &trans      &trans      &trans      &trans      &trans      &trans
+&trans  &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)  &none          &trans  &trans      &trans  &trans     &none   &kp LS(N6)  &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp LS(N0)  &trans
+&trans  &trans      &trans      &trans      &trans      &trans                             &trans      &trans                     &trans      &trans      &trans      &trans      &trans      &trans
+&trans  &trans      &trans      &trans      &trans                  &kp LS(EQUAL)  &trans  &trans      &trans  &kp EQUAL  &trans              &trans      &trans      &trans      &trans      &trans
             >;
         };
 
