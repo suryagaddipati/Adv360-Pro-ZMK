@@ -82,8 +82,8 @@
             display-name = "Sym";
             bindings = <
 &trans      &trans      &trans    &trans    &trans     &trans  &trans                                                   &trans          &trans  &trans  &trans     &trans    &trans    &trans
+&trans      &trans      &trans    &trans    &trans     &trans  &none                                                    &none          &trans  &trans  &trans     &trans    &trans    &trans
 &trans      &kp LS(COMMA)  &kp LS(DOT)  &kp LBKT  &kp RBKT  &kp LS(BSLH)  &none                                                    &none          &kp LS(LBKT)  &kp LS(RBKT)  &kp LS(SQT)  &kp SQT    &kp GRAVE  &trans
-&trans      &kp MINUS   &kp EQUAL  &kp LBKT   &kp RBKT   &kp LS(BSLH)   &none      &trans  &trans      &trans   &trans  &none          &kp SQT   &kp LS(SQT)   &kp LS(N9)  &kp LS(N0)  &kp COMMA  &kp DOT
 &trans      &trans      &trans    &trans    &trans     &trans                        &trans      &trans                            &trans  &trans  &trans  &trans   &trans   &trans
 &trans      &trans      &trans    &trans    &trans          &trans  &trans  &trans       &trans  &trans  &trans          &trans  &trans   &trans  &trans  &trans
             >;
