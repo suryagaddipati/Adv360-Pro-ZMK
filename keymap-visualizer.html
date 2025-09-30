@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adv360 Pro Keymap Visualizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%);
+            color: #e0e0e0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #64ffda, #00b4d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .layer-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .layer-btn {
+            padding: 10px 20px;
+            border: 2px solid #444;
+            background: #2a2a3e;
+            color: #e0e0e0;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .layer-btn:hover {
+            border-color: #64ffda;
+            transform: translateY(-2px);
+        }
+
+        .layer-btn.active {
+            background: linear-gradient(135deg, #64ffda 0%, #00b4d8 100%);
+            color: #1e1e2e;
+            border-color: #64ffda;
+        }
+
+        .keyboard-container {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .keyboard-half {
+            position: relative;
+        }
+
+        .key-row {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+
+        .left-half .key-row:nth-child(1) {
+        }
+
+        .left-half .key-row:nth-child(2) {
+        }
+
+        .left-half .key-row:nth-child(3) {
+        }
+
+        .left-half .key-row:nth-child(4) {
+        }
+
+        .left-half .key-row:nth-child(5) {
+        }
+
+        .right-half .key-row:nth-child(1) {
+        }
+
+        .right-half .key-row:nth-child(2) {
+        }
+
+        .right-half .key-row:nth-child(3) {
+        }
+
+        .right-half .key-row:nth-child(4) {
+        }
+
+        .right-half .key-row:nth-child(5) {
+        }
+
+        .key {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #444;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            padding: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .key:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(100, 255, 218, 0.3);
+        }
+
+        .key-label {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        .key-behavior {
+            font-size: 9px;
+            color: #888;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .key.key-standard {
+            background: linear-gradient(135deg, #3a3a4e 0%, #2a2a3e 100%);
+        }
+
+        .key.key-modifier {
+            background: linear-gradient(135deg, #5e5ce6 0%, #4a48c9 100%);
+            border-color: #7775f1;
+        }
+
+        .key.key-layer {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            border-color: #ff8787;
+        }
+
+        .key.key-special {
+            background: linear-gradient(135deg, #00b4d8 0%, #0096c7 100%);
+            border-color: #48cae4;
+        }
+
+        .key.key-transparent {
+            background: transparent;
+            border-color: #333;
+            color: #666;
+        }
+
+        .key.key-none {
+            background: #1a1a2e;
+            border-color: #2a2a3e;
+            color: #444;
+        }
+
+        .key.key-nav {
+            background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+            border-color: #f72585;
+        }
+
+        .key.key-number {
+            background: linear-gradient(135deg, #06ffa5 0%, #00d9a0 100%);
+            border-color: #06ffa5;
+            color: #1e1e2e;
+        }
+
+        .key.key-function {
+            background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%);
+            border-color: #ffd60a;
+            color: #1e1e2e;
+        }
+
+        .key.thumb.large {
+            width: 90px;
+            height: 60px;
+        }
+
+        .key.thumb.small {
+            width: 60px;
+            height: 60px;
+        }
+
+        .thumb-cluster {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #64ffda;
+            border-radius: 12px;
+            background: rgba(100, 255, 218, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .thumb-cluster .key-row {
+            gap: 8px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #444;
+        }
+
+        .info-panel {
+            background: #2a2a3e;
+            border: 2px solid #444;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .info-panel.active {
+            display: block;
+        }
+
+        .info-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #64ffda;
+        }
+
+        .info-details {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advantage 360 Pro Keymap</h1>
+            <p>Interactive ZMK Keymap Visualizer</p>
+        </header>
+
+        <div class="layer-selector" id="layerSelector"></div>
+
+        <div class="keyboard-container">
+            <div class="keyboard-half left-half" id="leftHalf"></div>
+            <div class="keyboard-half right-half" id="rightHalf"></div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #3a3a4e 0%, #2a2a3e 100%);"></div>
+                <span>Standard</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #5e5ce6 0%, #4a48c9 100%);"></div>
+                <span>Modifier</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);"></div>
+                <span>Layer</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #06ffa5 0%, #00d9a0 100%);"></div>
+                <span>Number</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%);"></div>
+                <span>Function</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);"></div>
+                <span>Navigation</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #00b4d8 0%, #0096c7 100%);"></div>
+                <span>Special</span>
+            </div>
+        </div>
+
+        <div class="info-panel" id="infoPanel">
+            <div class="info-title">Key Details</div>
+            <div class="info-details" id="infoDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        const keymapData = {
+            "layers": [
+                ["&kp EQUAL", "&kp N1", "&kp N2", "&kp N3", "&kp N4", "&kp N5", "&tog 1", "&mo 3", "&kp N6", "&kp N7", "&kp N8", "&kp N9", "&kp N0", "&kp MINUS", "&kp LCTRL", "&kp Q", "&kp W", "&kp E", "&kp R", "&kp T", "&none", "&none", "&kp Y", "&kp U", "&kp I", "&kp O", "&kp P", "&kp BSLH", "&kp ESC", "&hm LGUI A", "&hm LCTRL S", "&mt LSHFT D", "&kp F", "&kp G", "&none", "&mt LCTRL TAB", "&kp DEL", "&kp LGUI", "&mt RCTRL TAB", "&none", "&kp H", "&kp J", "&mt RSHFT K", "&hm RCTRL L", "&hm RGUI SEMI", "&kp SQT", "&kp LALT", "&kp Z", "&kp X", "&num 5 C", "&sym 4 V", "&kp B", "&kp HOME", "&kp PG_UP", "&kp N", "&sym 4 M", "&num 5 COMMA", "&kp DOT", "&kp FSLH", "&kp RALT", "&mo 2", "&kp GRAVE", "&kp CAPS", "&kp LEFT", "&kp RIGHT", "&kp SPACE", "&kp ESCAPE", "&mt LSHFT TAB", "&mt RSHFT TAB", "&kp ENTER", "&kp BACKSPACE", "&kp UP", "&kp DOWN", "&kp LBKT", "&kp RBKT", "&mo 2"],
+                ["&kp EQUAL", "&kp N1", "&kp N2", "&kp N3", "&kp N4", "&kp N5", "&trans", "&mo 3", "&kp N6", "&kp KP_NUM", "&kp KP_EQUAL", "&kp KP_DIVIDE", "&kp KP_MULTIPLY", "&kp MINUS", "&kp LCTRL", "&kp Q", "&kp W", "&kp E", "&kp R", "&kp T", "&none", "&none", "&kp Y", "&kp KP_N7", "&kp KP_N8", "&kp KP_N9", "&kp KP_MINUS", "&kp BSLH", "&kp ESC", "&hm LGUI A", "&hm LCTRL S", "&mt LSHFT D", "&kp F", "&kp G", "&none", "&mt LCTRL TAB", "&kp LALT", "&kp LGUI", "&mt RCTRL TAB", "&none", "&kp H", "&kp KP_N4", "&mt RSHFT KP_N5", "&hm RCTRL KP_N6", "&hm RGUI KP_PLUS", "&kp SQT", "&kp LALT", "&kp Z", "&kp X", "&num 5 C", "&sym 4 V", "&kp B", "&kp HOME", "&kp PG_UP", "&kp N", "&sym 4 KP_N1", "&num 5 KP_N2", "&kp KP_N3", "&kp KP_ENTER", "&kp RALT", "&mo 2", "&kp GRAVE", "&kp CAPS", "&kp LEFT", "&kp RIGHT", "&kp BSPC", "&kp DEL", "&kp END", "&kp PG_DN", "&kp ENTER", "&kp KP_N0", "&kp UP", "&kp DOWN", "&kp KP_DOT", "&kp RBKT", "&mo 2"],
+                ["&kp F1", "&kp F2", "&kp F3", "&kp F4", "&kp F5", "&kp F6", "&tog 1", "&mo 3", "&kp F7", "&kp F8", "&kp F9", "&kp F10", "&kp F11", "&kp F12", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&none", "&none", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&none", "&trans", "&trans", "&trans", "&trans", "&none", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans"],
+                ["&none", "&bt BT_SEL 0", "&bt BT_SEL 1", "&bt BT_SEL 2", "&bt BT_SEL 3", "&bt BT_SEL 4", "&none", "&trans", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&bootloader", "&bootloader", "&none", "&none", "&none", "&none", "&none", "&none", "&studio_unlock", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&bt BT_CLR", "&none", "&stp STP_BAT", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&macro_ver", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&none", "&bl BL_TOG", "&rgb_ug RGB_TOG", "&bl BL_INC", "&bl BL_DEC", "&none", "&none", "&none"],
+                ["&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&none", "&none", "&trans", "&kp MINUS", "&kp LS(MINUS)", "&kp LEFT_BRACKET", "&kp RIGHT_BRACKET", "&trans", "&trans", "&kp LS(N1)", "&kp LS(N2)", "&kp LS(N3)", "&kp LS(N4)", "&kp LS(N5)", "&none", "&trans", "&trans", "&trans", "&trans", "&kp TAB", "&kp LS(N6)", "&kp LS(N7)", "&kp LS(N8)", "&kp LS(N9)", "&kp LS(N0)", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&kp LS(COMMA)", "&kp LS(PERIOD)", "&kp LS(KP_SLASH)", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&kp LS(EQUAL)", "&kp DOUBLE_QUOTES", "&trans", "&trans", "&kp SINGLE_QUOTE", "&kp EQUAL", "&trans", "&trans", "&trans", "&trans", "&trans"],
+                ["&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&none", "&none", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&kp N1", "&kp N2", "&kp N3", "&kp N4", "&kp N5", "&none", "&trans", "&trans", "&trans", "&trans", "&none", "&kp N6", "&kp N7", "&kp N8", "&kp N9", "&kp N0", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans", "&trans"]
+            ],
+            "layer_names": ["Base", "Keypad", "Fn", "Mod", "Sym", "Num"]
+        };
+
+        const keyLayout = {
+            left: [
+                [0, 1, 2, 3, 4, 5, 6],
+                [14, 15, 16, 17, 18, 19, 20],
+                [28, 29, 30, 31, 32, 33, 34],
+                [46, 47, 48, 49, 50, 51],
+                [60, 61, 62, 63, 64]
+            ],
+            right: [
+                [7, 8, 9, 10, 11, 12, 13],
+                [21, 22, 23, 24, 25, 26, 27],
+                [39, 40, 41, 42, 43, 44, 45],
+                [54, 55, 56, 57, 58, 59],
+                [71, 72, 73, 74, 75]
+            ],
+            leftThumb: [
+                [35, 36],
+                [52],
+                [65, 66, 67]
+            ],
+            rightThumb: [
+                [37, 38],
+                [53],
+                [68, 69, 70]
+            ],
+            thumbs: [35, 36, 37, 38, 52, 53, 65, 66, 67, 68, 69, 70]
+        };
+
+        let currentLayer = 0;
+
+        function parseBinding(binding) {
+            binding = binding.trim();
+
+            const keyMap = {
+                'N1': '1', 'N2': '2', 'N3': '3', 'N4': '4', 'N5': '5',
+                'N6': '6', 'N7': '7', 'N8': '8', 'N9': '9', 'N0': '0',
+                'EQUAL': '=', 'MINUS': '-', 'LBKT': '[', 'RBKT': ']',
+                'SEMI': ';', 'SQT': "'", 'COMMA': ',', 'DOT': '.',
+                'FSLH': '/', 'BSLH': '\\', 'GRAVE': '`',
+                'LSHFT': 'Shift', 'RSHFT': 'Shift',
+                'LCTRL': 'Ctrl', 'RCTRL': 'Ctrl',
+                'LALT': 'Alt', 'RALT': 'Alt',
+                'LGUI': 'Gui', 'RGUI': 'Gui',
+                'ENTER': 'Ent', 'SPACE': 'Spc', 'BSPC': 'BkSp', 'BACKSPACE': 'BkSp',
+                'ESCAPE': 'Esc', 'TAB': 'Tab', 'ESC': 'Esc', 'DEL': 'Del',
+                'CAPS': 'Caps', 'PG_UP': 'PgUp', 'PG_DN': 'PgDn',
+                'LEFT': '←', 'RIGHT': '→', 'UP': '↑', 'DOWN': '↓',
+                'HOME': 'Home', 'END': 'End',
+                'LEFT_BRACKET': '[', 'RIGHT_BRACKET': ']',
+                'SINGLE_QUOTE': "'", 'DOUBLE_QUOTES': '"',
+                'KP_NUM': 'Num', 'KP_EQUAL': '=', 'KP_DIVIDE': '/',
+                'KP_MULTIPLY': '*', 'KP_MINUS': '-', 'KP_PLUS': '+',
+                'KP_ENTER': 'Ent', 'KP_DOT': '.',
+                'KP_SLASH': '/',
+                'KP_N0': '0', 'KP_N1': '1', 'KP_N2': '2', 'KP_N3': '3',
+                'KP_N4': '4', 'KP_N5': '5', 'KP_N6': '6', 'KP_N7': '7',
+                'KP_N8': '8', 'KP_N9': '9',
+                'LS(N1)': '!', 'LS(N2)': '@', 'LS(N3)': '#', 'LS(N4)': '$', 'LS(N5)': '%',
+                'LS(N6)': '^', 'LS(N7)': '&', 'LS(N8)': '*', 'LS(N9)': '(', 'LS(N0)': ')',
+                'LS(MINUS)': '_', 'LS(EQUAL)': '+',
+                'LS(COMMA)': '<', 'LS(PERIOD)': '>',
+                'LS(KP_SLASH)': '?'
+            };
+
+            if (binding === '&none') return { label: '✗', type: 'none', full: binding };
+            if (binding === '&trans') return { label: '▽', type: 'transparent', full: binding };
+
+            if (binding.startsWith('&hm ')) {
+                const parts = binding.substring(4).split(' ');
+                const mod = keyMap[parts[0]] || parts[0];
+                const key = keyMap[parts[1]] || parts[1];
+                return { label: key, behavior: `Hold: ${mod}`, type: 'modifier', full: binding };
+            }
+
+            if (binding.startsWith('&mt ')) {
+                const parts = binding.substring(4).split(' ');
+                const mod = keyMap[parts[0]] || parts[0];
+                const key = keyMap[parts[1]] || parts[1];
+                return { label: key, behavior: `Hold: ${mod}`, type: 'modifier', full: binding };
+            }
+
+            if (binding.startsWith('&sym ')) {
+                const parts = binding.substring(5).split(' ');
+                const layer = parts[0];
+                const key = keyMap[parts[1]] || parts[1];
+                return { label: key, behavior: `Hold: L${layer}`, type: 'layer', full: binding };
+            }
+
+            if (binding.startsWith('&num ')) {
+                const parts = binding.substring(5).split(' ');
+                const layer = parts[0];
+                const key = keyMap[parts[1]] || parts[1];
+                return { label: key, behavior: `Hold: L${layer}`, type: 'layer', full: binding };
+            }
+
+            if (binding.startsWith('&kp ')) {
+                let key = binding.substring(4).trim();
+                if (key.startsWith('LS(') && key.endsWith(')')) {
+                    const inner = key.substring(3, key.length - 1);
+                    key = 'LS(' + inner + ')';
+                }
+                const label = keyMap[key] || key.substring(0, 5);
+                const type = detectKeyType(key);
+                return { label, type, full: binding };
+            }
+
+            if (binding.startsWith('&mo ')) {
+                const layer = binding.substring(4).trim();
+                return { label: `L${layer}`, type: 'layer', full: binding };
+            }
+
+            if (binding.startsWith('&tog ')) {
+                const layer = binding.substring(5).trim();
+                return { label: `TG${layer}`, type: 'layer', full: binding };
+            }
+
+            if (binding.startsWith('&bt ')) {
+                const cmd = binding.substring(4).trim();
+                if (cmd.includes('BT_SEL')) {
+                    const num = cmd.match(/\d+/);
+                    return { label: `BT${num ? num[0] : ''}`, type: 'special', full: binding };
+                }
+                if (cmd.includes('BT_CLR')) {
+                    return { label: 'BTClr', type: 'special', full: binding };
+                }
+            }
+
+            if (binding.includes('bootloader')) {
+                return { label: 'BOOT', type: 'special', full: binding };
+            }
+
+            if (binding.includes('studio_unlock')) return { label: 'Studio', type: 'special', full: binding };
+            if (binding.includes('BL_TOG')) return { label: 'BL', type: 'special', full: binding };
+            if (binding.includes('RGB_TOG')) return { label: 'RGB', type: 'special', full: binding };
+            if (binding.includes('BL_INC')) return { label: 'BL+', type: 'special', full: binding };
+            if (binding.includes('BL_DEC')) return { label: 'BL-', type: 'special', full: binding };
+            if (binding.includes('macro_ver')) return { label: 'VER', type: 'special', full: binding };
+            if (binding.includes('STP_BAT')) return { label: 'BAT', type: 'special', full: binding };
+
+            return { label: binding.substring(0, 5), type: 'standard', full: binding };
+        }
+
+        function detectKeyType(key) {
+            const modifiers = ['LSHFT', 'RSHFT', 'LCTRL', 'RCTRL', 'LALT', 'RALT', 'LGUI', 'RGUI'];
+            const numbers = ['N0', 'N1', 'N2', 'N3', 'N4', 'N5', 'N6', 'N7', 'N8', 'N9'];
+            const functions = ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'];
+            const nav = ['LEFT', 'RIGHT', 'UP', 'DOWN', 'HOME', 'END', 'PG_UP', 'PG_DN'];
+
+            if (modifiers.includes(key)) return 'modifier';
+            if (numbers.includes(key) || key.startsWith('KP_N')) return 'number';
+            if (functions.includes(key)) return 'function';
+            if (nav.includes(key)) return 'nav';
+            return 'standard';
+        }
+
+        function createKey(binding, position) {
+            const parsed = parseBinding(binding);
+            const key = document.createElement('div');
+            key.className = `key key-${parsed.type}`;
+
+            if (keyLayout.thumbs.includes(position)) {
+                key.classList.add('thumb');
+                // Large thumb keys are 65,66,67,68,69,70
+                if (position >= 65 && position <= 70) {
+                    key.classList.add('large');
+                } else {
+                    key.classList.add('small');
+                }
+            }
+
+            key.innerHTML = `
+                <span class="key-label">${parsed.label}</span>
+                ${parsed.behavior ? `<span class="key-behavior">${parsed.behavior}</span>` : ''}
+            `;
+
+            key.addEventListener('click', () => {
+                showKeyInfo(parsed, position);
+            });
+
+            return key;
+        }
+
+        function showKeyInfo(parsed, position) {
+            const panel = document.getElementById('infoPanel');
+            const details = document.getElementById('infoDetails');
+
+            details.innerHTML = `
+                <strong>Position:</strong> ${position}<br>
+                <strong>Binding:</strong> ${parsed.full}<br>
+                <strong>Type:</strong> ${parsed.type}<br>
+                <strong>Layer:</strong> ${keymapData.layer_names[currentLayer]}
+            `;
+
+            panel.classList.add('active');
+        }
+
+        function renderLayer(layerIndex) {
+            const leftHalf = document.getElementById('leftHalf');
+            const rightHalf = document.getElementById('rightHalf');
+
+            leftHalf.innerHTML = '';
+            rightHalf.innerHTML = '';
+            leftHalf.className = 'keyboard-half left-half';
+            rightHalf.className = 'keyboard-half right-half';
+
+            const layer = keymapData.layers[layerIndex];
+
+            keyLayout.left.forEach(row => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'key-row';
+                row.forEach(pos => {
+                    rowDiv.appendChild(createKey(layer[pos], pos));
+                });
+                leftHalf.appendChild(rowDiv);
+            });
+
+            const leftThumbCluster = document.createElement('div');
+            leftThumbCluster.className = 'thumb-cluster';
+            keyLayout.leftThumb.forEach(row => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'key-row';
+                row.forEach(pos => {
+                    rowDiv.appendChild(createKey(layer[pos], pos));
+                });
+                leftThumbCluster.appendChild(rowDiv);
+            });
+            leftHalf.appendChild(leftThumbCluster);
+
+            keyLayout.right.forEach(row => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'key-row';
+                row.forEach(pos => {
+                    rowDiv.appendChild(createKey(layer[pos], pos));
+                });
+                rightHalf.appendChild(rowDiv);
+            });
+
+            const rightThumbCluster = document.createElement('div');
+            rightThumbCluster.className = 'thumb-cluster';
+            keyLayout.rightThumb.forEach(row => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'key-row';
+                row.forEach(pos => {
+                    rowDiv.appendChild(createKey(layer[pos], pos));
+                });
+                rightThumbCluster.appendChild(rowDiv);
+            });
+            rightHalf.appendChild(rightThumbCluster);
+        }
+
+        function initLayerSelector() {
+            const selector = document.getElementById('layerSelector');
+
+            keymapData.layer_names.forEach((name, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'layer-btn';
+                btn.textContent = `Layer ${index}: ${name}`;
+                btn.addEventListener('click', () => {
+                    currentLayer = index;
+                    document.querySelectorAll('.layer-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderLayer(index);
+                });
+
+                if (index === 0) btn.classList.add('active');
+                selector.appendChild(btn);
+            });
+        }
+
+        initLayerSelector();
+        renderLayer(0);
+    </script>
+</body>
+</html>
