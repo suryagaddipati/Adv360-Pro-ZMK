@@ -80,13 +80,24 @@
 
         .keyboard-half {
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .key-row {
             display: flex;
             gap: 6px;
-            justify-content: center;
+            justify-content: flex-start;
             margin-bottom: 6px;
+        }
+
+        .keyboard-half .key-row:nth-child(4) {
+            padding-left: 66px;
+        }
+
+        .keyboard-half .key-row:nth-child(5) {
+            padding-left: 132px;
         }
 
         .key {
@@ -363,6 +374,7 @@
                 'EQUAL': '=', 'MINUS': '-', 'LBKT': '[', 'RBKT': ']',
                 'SEMI': ';', 'SQT': "'", 'COMMA': ',', 'DOT': '.',
                 'FSLH': '/', 'BSLH': '\\', 'GRAVE': '`',
+                'STAR': '*', 'PRCNT': '%', 'UNDER': '_', 'PLUS': '+',
                 'LSHFT': 'Shift', 'RSHFT': 'Shift',
                 'LCTRL': 'Ctrl', 'RCTRL': 'Ctrl',
                 'LALT': 'Alt', 'RALT': 'Alt',
@@ -385,7 +397,7 @@
                 'LS(N6)': '^', 'LS(N7)': '&', 'LS(N8)': '*', 'LS(N9)': '(', 'LS(N0)': ')',
                 'LS(MINUS)': '_', 'LS(EQUAL)': '+',
                 'LS(COMMA)': '<', 'LS(PERIOD)': '>',
-                'LS(KP_SLASH)': '?'
+                'LS(FSLH)': '?', 'LS(KP_SLASH)': '?'
             };
 
             if (binding === '&none') return { label: '✗', type: 'none', full: binding };

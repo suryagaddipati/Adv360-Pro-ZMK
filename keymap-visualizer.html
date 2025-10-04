@@ -80,13 +80,24 @@
 
         .keyboard-half {
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .key-row {
             display: flex;
             gap: 6px;
-            justify-content: center;
+            justify-content: flex-start;
             margin-bottom: 6px;
+        }
+
+        .keyboard-half .key-row:nth-child(4) {
+            padding-left: 66px;
+        }
+
+        .keyboard-half .key-row:nth-child(5) {
+            padding-left: 132px;
         }
 
         .key {
@@ -358,7 +369,7 @@
               "&hm LCTRL S",
               "&mt LSHFT D",
               "&kp F",
-              "&lt 1 G",
+              "&lt 6 G",
               "&none",
               "&mt LCTRL TAB",
               "&kp DEL",
@@ -646,10 +657,10 @@
               "&trans",
               "&trans",
               "&trans",
-              "&trans",
-              "&trans",
-              "&trans",
-              "&trans",
+              "&kp FSLH",
+              "&kp STAR",
+              "&kp EQUAL",
+              "&kp PRCNT",
               "&trans",
               "&trans",
               "&trans",
@@ -664,12 +675,12 @@
               "&kp LS(MINUS)",
               "&kp LEFT_BRACKET",
               "&kp RIGHT_BRACKET",
-              "&trans",
+              "&kp BSLH",
               "&trans",
               "&kp LS(N1)",
               "&kp LS(N2)",
               "&kp LS(N3)",
-              "&kp LS(N4)",
+              "&trans",
               "&kp LS(N5)",
               "&none",
               "&trans",
@@ -682,7 +693,7 @@
               "&kp LS(N8)",
               "&kp LS(N9)",
               "&kp LS(N0)",
-              "&trans",
+              "&kp LS(N4)",
               "&trans",
               "&trans",
               "&trans",
@@ -695,8 +706,8 @@
               "&trans",
               "&kp LS(COMMA)",
               "&kp LS(PERIOD)",
-              "&kp LS(KP_SLASH)",
               "&trans",
+              "&kp UNDER",
               "&trans",
               "&trans",
               "&trans",
@@ -710,7 +721,7 @@
               "&kp EQUAL",
               "&trans",
               "&trans",
-              "&trans",
+              "&kp COMMA",
               "&trans",
               "&trans"
             ],
@@ -791,6 +802,84 @@
               "&trans",
               "&trans",
               "&trans"
+            ],
+            [
+              "&kp EQUAL",
+              "&kp N1",
+              "&kp N2",
+              "&kp N3",
+              "&kp N4",
+              "&kp N5",
+              "&trans",
+              "&mo 3",
+              "&kp N6",
+              "&kp N7",
+              "&kp EQUAL",
+              "&kp FSLH",
+              "&kp STAR",
+              "&kp MINUS",
+              "&kp LCTRL",
+              "&kp Q",
+              "&kp W",
+              "&kp E",
+              "&kp R",
+              "&kp T",
+              "&none",
+              "&none",
+              "&kp Y",
+              "&kp N7",
+              "&kp N8",
+              "&kp N9",
+              "&kp MINUS",
+              "&kp BSLH",
+              "&kp ESC",
+              "&hm LGUI A",
+              "&hm LCTRL S",
+              "&mt LSHFT D",
+              "&kp F",
+              "&kp G",
+              "&none",
+              "&mt LCTRL TAB",
+              "&kp LALT",
+              "&kp LGUI",
+              "&mt RCTRL TAB",
+              "&none",
+              "&kp H",
+              "&kp N4",
+              "&mt RSHFT N5",
+              "&hm RCTRL N6",
+              "&hm RGUI PLUS",
+              "&kp SQT",
+              "&kp LALT",
+              "&kp Z",
+              "&kp X",
+              "&num 5 C",
+              "&sym 4 V",
+              "&kp B",
+              "&kp HOME",
+              "&kp PG_UP",
+              "&kp N",
+              "&sym 4 N1",
+              "&num 5 N2",
+              "&kp N3",
+              "&kp ENTER",
+              "&kp RALT",
+              "&mo 2",
+              "&kp GRAVE",
+              "&kp CAPS",
+              "&kp LEFT",
+              "&kp RIGHT",
+              "&kp BSPC",
+              "&kp DEL",
+              "&kp END",
+              "&kp PG_DN",
+              "&kp ENTER",
+              "&kp N0",
+              "&kp UP",
+              "&kp DOWN",
+              "&kp DOT",
+              "&kp RBKT",
+              "&mo 2"
             ]
           ],
           "layer_names": [
@@ -799,7 +888,8 @@
             "Fn",
             "Mod",
             "Sym",
-            "Num"
+            "Num",
+            "Numpad"
           ]
         };
 
@@ -842,6 +932,7 @@
                 'EQUAL': '=', 'MINUS': '-', 'LBKT': '[', 'RBKT': ']',
                 'SEMI': ';', 'SQT': "'", 'COMMA': ',', 'DOT': '.',
                 'FSLH': '/', 'BSLH': '\\', 'GRAVE': '`',
+                'STAR': '*', 'PRCNT': '%', 'UNDER': '_', 'PLUS': '+',
                 'LSHFT': 'Shift', 'RSHFT': 'Shift',
                 'LCTRL': 'Ctrl', 'RCTRL': 'Ctrl',
                 'LALT': 'Alt', 'RALT': 'Alt',
@@ -864,7 +955,7 @@
                 'LS(N6)': '^', 'LS(N7)': '&', 'LS(N8)': '*', 'LS(N9)': '(', 'LS(N0)': ')',
                 'LS(MINUS)': '_', 'LS(EQUAL)': '+',
                 'LS(COMMA)': '<', 'LS(PERIOD)': '>',
-                'LS(KP_SLASH)': '?'
+                'LS(FSLH)': '?', 'LS(KP_SLASH)': '?'
             };
 
             if (binding === '&none') return { label: '✗', type: 'none', full: binding };
