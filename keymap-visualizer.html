@@ -246,6 +246,28 @@
         .info-details {
             line-height: 1.6;
         }
+
+        body.hide-standard .key.key-standard,
+        body.hide-modifier .key.key-modifier,
+        body.hide-layer .key.key-layer,
+        body.hide-special .key.key-special,
+        body.hide-nav .key.key-nav,
+        body.hide-number .key.key-number,
+        body.hide-function .key.key-function {
+            background: linear-gradient(135deg, #3a3a4e 0%, #2a2a3e 100%) !important;
+            border-color: #444 !important;
+            color: #e0e0e0 !important;
+        }
+
+        .legend-item {
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .legend-item.active {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -263,31 +285,31 @@
         </div>
 
         <div class="legend">
-            <div class="legend-item">
+            <div class="legend-item" data-type="standard">
                 <div class="legend-color" style="background: linear-gradient(135deg, #3a3a4e 0%, #2a2a3e 100%);"></div>
                 <span>Standard</span>
             </div>
-            <div class="legend-item">
+            <div class="legend-item" data-type="modifier">
                 <div class="legend-color" style="background: linear-gradient(135deg, #5e5ce6 0%, #4a48c9 100%);"></div>
                 <span>Modifier</span>
             </div>
-            <div class="legend-item">
+            <div class="legend-item" data-type="layer">
                 <div class="legend-color" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);"></div>
                 <span>Layer</span>
             </div>
-            <div class="legend-item">
+            <div class="legend-item" data-type="number">
                 <div class="legend-color" style="background: linear-gradient(135deg, #06ffa5 0%, #00d9a0 100%);"></div>
                 <span>Number</span>
             </div>
-            <div class="legend-item">
+            <div class="legend-item" data-type="function">
                 <div class="legend-color" style="background: linear-gradient(135deg, #ffd60a 0%, #ffc300 100%);"></div>
                 <span>Function</span>
             </div>
-            <div class="legend-item">
+            <div class="legend-item" data-type="nav">
                 <div class="legend-color" style="background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);"></div>
                 <span>Navigation</span>
             </div>
-            <div class="legend-item">
+            <div class="legend-item" data-type="special">
                 <div class="legend-color" style="background: linear-gradient(135deg, #00b4d8 0%, #0096c7 100%);"></div>
                 <span>Special</span>
             </div>
@@ -855,6 +877,13 @@
                 return { label: key, behavior: `Hold: ${mod}`, type: 'modifier', full: binding };
             }
 
+            if (binding.startsWith('&lt ')) {
+                const parts = binding.substring(4).split(' ');
+                const layer = parts[0];
+                const key = keyMap[parts[1]] || parts[1];
+                return { label: key, behavior: `Hold: L${layer}`, type: 'layer', full: binding };
+            }
+
             if (binding.startsWith('&mt ')) {
                 const parts = binding.substring(4).split(' ');
                 if (/^\d+$/.test(parts[0])) {
@@ -1056,6 +1085,30 @@
 
         initLayerSelector();
         renderLayer(0);
+
+        // Individual color toggle functionality
+        const legendItems = document.querySelectorAll('.legend-item');
+
+        // Start with all colors off (add hide classes)
+        legendItems.forEach(item => {
+            const type = item.getAttribute('data-type');
+            document.body.classList.add('hide-' + type);
+        });
+
+        legendItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const type = this.getAttribute('data-type');
+                const hideClass = 'hide-' + type;
+
+                if (document.body.classList.contains(hideClass)) {
+                    document.body.classList.remove(hideClass);
+                    this.classList.add('active');
+                } else {
+                    document.body.classList.add(hideClass);
+                    this.classList.remove('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
