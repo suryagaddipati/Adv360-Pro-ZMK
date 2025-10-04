@@ -23,9 +23,7 @@ all:
 		-e COMMIT=$(COMMIT) \
 		-e BUILD_RIGHT=true \
 		zmk
-	@if [ -n "$(USER)" ] && [ "$(USER)" != "runner" ]; then \
-		sudo chown $(USER):$(USER) firmware/*.uf2 2>/dev/null || true; \
-	fi
+	@[ ! -f firmware/*.uf2 ] || sudo chown $(USER):$(USER) firmware/*.uf2 2>/dev/null || true
 	git checkout config/version.dtsi
 
 left:
@@ -39,9 +37,7 @@ left:
 		-e COMMIT=$(COMMIT) \
 		-e BUILD_RIGHT=false \
 		zmk
-	@if [ -n "$(USER)" ] && [ "$(USER)" != "runner" ]; then \
-		sudo chown $(USER):$(USER) firmware/*.uf2 2>/dev/null || true; \
-	fi
+	@[ ! -f firmware/*.uf2 ] || sudo chown $(USER):$(USER) firmware/*.uf2 2>/dev/null || true
 	git checkout config/version.dtsi
 
 clean_firmware:
