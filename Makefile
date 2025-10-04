@@ -1,6 +1,7 @@
 DOCKER := $(shell { command -v podman || command -v docker; })
 TIMESTAMP := $(shell date -u +"%Y%m%d%H%M")
 COMMIT := $(shell git rev-parse --short HEAD 2>/dev/null)
+USER := $(shell whoami)
 ifeq ($(shell uname),Darwin)
 SELINUX1 :=
 SELINUX2 :=
@@ -12,6 +13,7 @@ endif
 .PHONY: all left clean_firmware clean_image clean
 
 all:
+	rm -f firmware/*.uf2
 	$(shell bin/get_version_local.sh clique >> /dev/null)
 	$(DOCKER) build --tag zmk --file Dockerfile .
 	$(DOCKER) run --rm -it --name zmk \
@@ -21,9 +23,13 @@ all:
 		-e COMMIT=$(COMMIT) \
 		-e BUILD_RIGHT=true \
 		zmk
+	@if [ -n "$(USER)" ] && [ "$(USER)" != "runner" ]; then \
+		sudo chown $(USER):$(USER) firmware/*.uf2 2>/dev/null || true; \
+	fi
 	git checkout config/version.dtsi
 
 left:
+	rm -f firmware/*.uf2
 	$(shell bin/get_version_local.sh clique >> /dev/null)
 	$(DOCKER) build --tag zmk --file Dockerfile .
 	$(DOCKER) run --rm -it --name zmk \
@@ -33,6 +39,9 @@ left:
 		-e COMMIT=$(COMMIT) \
 		-e BUILD_RIGHT=false \
 		zmk
+	@if [ -n "$(USER)" ] && [ "$(USER)" != "runner" ]; then \
+		sudo chown $(USER):$(USER) firmware/*.uf2 2>/dev/null || true; \
+	fi
 	git checkout config/version.dtsi
 
 clean_firmware:
