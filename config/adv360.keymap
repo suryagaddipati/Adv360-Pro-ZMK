@@ -111,11 +111,11 @@
         sym {
             display-name = "Sym";
             bindings = <
-&trans  &trans      &trans      &trans      &trans  &trans      &trans                                                          &trans     &trans     &trans           &trans                &trans                 &trans      &trans
-&trans  &trans      &trans      &trans      &trans  &trans      &none                                                           &none      &kp PIPE   &kp MINUS        &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &trans      &trans
-&trans  &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &trans  &kp LS(N5)  &none          &trans             &trans      &trans  &trans    &trans     &kp CARET  &kp UNDERSCORE   &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp DOLLAR  &trans
-&trans  &trans      &trans      &trans      &trans  &trans                                        &trans      &trans                       &kp HASH   &kp EXCLAMATION  &kp LEFT_BRACE        &kp RIGHT_BRACE        &trans      &kp UNDER
-&trans  &trans      &trans      &trans      &trans              &kp LS(EQUAL)  &kp DOUBLE_QUOTES  &trans      &trans  &kp PLUS  &kp EQUAL             &kp ASTERISK     &kp PERCENT           &kp COMMA              &trans      &trans
+&trans  &trans      &trans      &trans      &trans  &trans      &trans                                                          &trans     &trans     &trans           &trans                &trans                 &trans          &trans
+&trans  &trans      &trans      &trans      &trans  &trans      &none                                                           &none      &kp PIPE   &kp MINUS        &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp AMPERSAND   &trans
+&trans  &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &trans  &kp LS(N5)  &none          &trans             &trans      &trans  &trans    &trans     &kp CARET  &kp UNDERSCORE   &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LS(DOLLAR)  &kp DOLLAR
+&trans  &trans      &trans      &trans      &trans  &trans                                        &trans      &trans                       &kp HASH   &kp EXCLAMATION  &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp AT_SIGN     &kp UNDER
+&trans  &trans      &trans      &trans      &trans              &kp LS(EQUAL)  &kp DOUBLE_QUOTES  &trans      &trans  &kp PLUS  &kp EQUAL             &kp ASTERISK     &kp PERCENT           &kp COMMA              &trans          &trans
             >;
         };
 
