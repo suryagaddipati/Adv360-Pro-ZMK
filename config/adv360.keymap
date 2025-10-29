@@ -67,11 +67,11 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp EQUAL  &kp N1      &kp N2       &kp N3       &kp N4     &kp N5   &tog 1                                                                     &mo 3          &kp N6  &kp N7    &kp N8        &kp N9       &kp N0         &kp MINUS
-&kp LCTRL  &kp Q       &kp W        &kp E        &kp R      &kp T    &none                                                                      &none          &kp Y   &kp U     &kp I         &kp O        &kp SEMICOLON  &kp BSLH
-&kp ESC    &hm LGUI A  &hm LCTRL S  &mt LSHFT D  &sym 4 F   &lt 6 G  &none      &mt LCTRL TAB  &kp DEL            &kp LGUI       &mt RCTRL TAB  &none          &kp H   &kp J     &mt RSHFT K   &hm RCTRL L  &hm RGUI P     &kp SQT
-&kp LALT   &kp Z       &kp X        &num 5 C     &kp V      &kp B                              &kp HOME           &kp PG_UP                                    &kp N   &sym 4 M  &num 5 COMMA  &kp DOT      &kp SLASH      &kp RALT
-&mo 2      &kp GRAVE   &kp CAPS     &kp LEFT     &kp RIGHT           &kp SPACE  &kp ESCAPE     &mt LSHFT TAB      &mt RSHFT TAB  &kp ENTER      &kp BACKSPACE          &kp UP    &kp DOWN      &kp LBKT     &kp RBKT       &mo 2
+&kp EQUAL  &kp N1      &kp N2       &kp N3       &kp N4     &kp N5   &tog 1                                                                       &mo 3          &kp N6  &kp N7    &kp N8        &kp N9       &kp N0         &kp MINUS
+&kp LCTRL  &kp Q       &kp W        &kp E        &kp R      &kp T    &none                                                                        &none          &kp Y   &kp U     &kp I         &kp O        &kp SEMICOLON  &kp BSLH
+&kp ESC    &hm LGUI A  &hm LCTRL S  &mt LSHFT D  &sym 4 F   &lt 6 G  &none        &mt LCTRL TAB  &kp DEL            &kp LGUI       &mt RCTRL TAB  &none          &kp H   &kp J     &mt RSHFT K   &hm RCTRL L  &hm RGUI P     &kp SQT
+&kp LALT   &kp Z       &kp X        &num 5 C     &kp V      &kp B                                &kp HOME           &kp PG_UP                                    &kp N   &sym 4 M  &num 5 COMMA  &kp DOT      &kp SLASH      &kp RALT
+&mo 2      &kp GRAVE   &kp CAPS     &kp LEFT     &kp RIGHT           &lt 6 SPACE  &kp ESCAPE     &mt LSHFT TAB      &mt RSHFT TAB  &kp ENTER      &kp BACKSPACE          &kp UP    &kp DOWN      &kp LBKT     &kp RBKT       &mo 2
             >;
         };
 
